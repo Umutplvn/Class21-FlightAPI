@@ -46,7 +46,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         trim: true,
         required: true,
-        // select: false, // veriler cagirildigi zaman bu verinin gelmemesini istiyorsak false'a kurariz. Default degeri true'dir
+        // select: false,
         set: (password) => passwordEncrypt(password),
     },
 
@@ -58,9 +58,9 @@ const UserSchema = new mongoose.Schema({
         validate: [
             (email) =>  {
                 const emailRegexCheck = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-                return emailRegexCheck.test(email)  // Emaili regex kontrol kistaslarina gore test et.
+                return emailRegexCheck.test(email)
             },
-            'Email type is not correct.'    // kontrolden gecmezse bu hatayi yazdir
+            'Email type is not correct.'
         ]
     },
 
@@ -80,7 +80,6 @@ const UserSchema = new mongoose.Schema({
     },
 
 }, { collection: 'users', timestamps: true })
-
 
 /* ------------------------------------------------------- */
 module.exports = mongoose.model('User', UserSchema)

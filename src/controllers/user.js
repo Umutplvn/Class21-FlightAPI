@@ -90,7 +90,7 @@ module.exports = {
             }
         */
 
-        const data = await User.updateOne({ _id: req.params.id }, req.body) // ({filtrele}, yeni veri)
+        const data = await User.updateOne({ _id: req.params.id }, req.body)
 
         res.status(202).send({
             error: false,
