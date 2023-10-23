@@ -260,6 +260,18 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "createdId": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -423,6 +435,18 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "createdId": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -560,6 +584,18 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "createdId": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -625,7 +661,41 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Reservation"
+              "type": "object",
+              "properties": {
+                "flightId": {
+                  "type": "string",
+                  "example": "...Flight.objectId..."
+                },
+                "passengers": {
+                  "type": "array",
+                  "example": [
+                    "...Passenger.objectId...",
+                    {
+                      "firstName": "string",
+                      "lastName": "string",
+                      "email": "string:email"
+                    }
+                  ],
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "firstName": {
+                        "type": "string",
+                        "example": "string"
+                      },
+                      "lastName": {
+                        "type": "string",
+                        "example": "string"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "string:email"
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         ],
@@ -697,6 +767,18 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "createdId": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -733,6 +815,28 @@
         "responses": {
           "202": {
             "description": "Accepted"
+          }
+        }
+      }
+    },
+    "/reservations/{id}/passengers": {
+      "get": {
+        "tags": [
+          "Reservations"
+        ],
+        "summary": "List Passengers of Reservation",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -848,7 +952,7 @@
               "type": "array",
               "example": [
                 true,
-                "Email field must be required"
+                "Email field must be required."
               ],
               "items": {
                 "type": "string"
@@ -858,7 +962,7 @@
               "type": "array",
               "example": [
                 true,
-                "There is this email. Email field must be unique"
+                "There is this email. Email field must be unique."
               ],
               "items": {
                 "type": "string"
@@ -978,9 +1082,6 @@
             "required": {
               "type": "boolean",
               "example": true
-            },
-            "get": {
-              "type": "function"
             }
           }
         },
@@ -1009,9 +1110,6 @@
             "required": {
               "type": "boolean",
               "example": true
-            },
-            "get": {
-              "type": "function"
             }
           }
         },
@@ -1076,19 +1174,18 @@
             },
             "enum": {
               "type": "array",
-              "example": [
-                "",
-                "M",
-                "F"
-              ],
               "items": {
-                "type": "string"
+                "properties": {
+                  "1": {
+                    "type": "string"
+                  },
+                  "2": {
+                    "type": "string"
+                  }
+                }
               }
             },
-            "default": {
-              "type": "string",
-              "example": ""
-            }
+            "default": {}
           }
         },
         "email": {
@@ -1102,11 +1199,34 @@
               "example": true
             },
             "required": {
-              "type": "boolean",
-              "example": true
+              "type": "array",
+              "example": [
+                true,
+                "Email field must be required."
+              ],
+              "items": {
+                "type": "string"
+              }
+            },
+            "unique": {
+              "type": "array",
+              "example": [
+                true,
+                "There is this email. Email field must be unique."
+              ],
+              "items": {
+                "type": "string"
+              }
             },
             "validate": {
-              "type": "function"
+              "type": "array",
+              "example": [
+                null,
+                "Email type is not correct."
+              ],
+              "items": {
+                "type": "string"
+              }
             }
           }
         },

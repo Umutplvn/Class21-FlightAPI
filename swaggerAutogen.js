@@ -21,7 +21,7 @@ const document = {
 	host: `${HOST}:${PORT}`,
 	basePath: '/',
 	schemes: ['http', 'https'],
-	// JWT Settings:
+	// Token/JWT Settings:
 	securityDefinitions: {
 		JWT: {
 			type: 'apiKey',
@@ -55,7 +55,7 @@ const document = {
 		"Passenger": require('./src/models/passenger').schema.obj,
 		"Reservation": require('./src/models/reservation').schema.obj,
 	}
-};
+}
 
 const routes = ['./index.js']
 const outputFile = './src/configs/swagger.json'
